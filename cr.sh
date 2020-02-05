@@ -49,13 +49,11 @@ main() {
     repo_root=$(git rev-parse --show-toplevel)
     pushd "$repo_root" > /dev/null
 
-    echo 'Looking up latest tag...'
-    local latest_tag
-    latest_tag=$(lookup_latest_tag)
+    echo "List charts in '$charts_dir'..."
+    ls $charts_dir
 
-    echo "Discovering changed charts since '$latest_tag'..."
     local changed_charts=()
-    readarray -t changed_charts <<< "$(lookup_changed_charts "$latest_tag")"
+    readarray -t changed_charts <<< "$(ls "$charts_dir")"
 
     if [[ -n "${changed_charts[*]}" ]]; then
         install_chart_releaser
