@@ -65,7 +65,7 @@ main() {
         mkdir -p .cr-index
 
         for chart in "${changed_charts[@]}"; do
-            package_chart "$chart"
+            package_chart "${charts_dir}/${chart}"
         done
 
         release_charts
