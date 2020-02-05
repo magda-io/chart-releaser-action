@@ -171,8 +171,20 @@ install_chart_releaser() {
 
 lookup_latest_tag() {
     git fetch --tags > /dev/null 2>&1
-    
+
     local tags=( $(git tag -l --sort=-version:refname | head -2) )
+
+    echo "tags: $tags"
+    echo "tags count: ${#tags[@]}"
+
+    if [ "${#tags[@]}" -ge "2" ]
+    then
+      echo "git rev-list -n 1 ${tags[1]}"
+      exit 1
+    else
+      echo "git log --reverse --pretty=format:"%H" | head -1"
+      exit 1
+    fi
 
     if [ "${#tags[@]}" -ge "2" ]
     then
