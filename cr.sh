@@ -180,10 +180,8 @@ lookup_latest_tag() {
     if [ "${#tags[@]}" -ge "2" ]
     then
       echo "git rev-list -n 1 ${tags[1]}"
-      exit 1
     else
       echo "git log --reverse --pretty=format:"%H" | head -1"
-      exit 1
     fi
 
     if [ "${#tags[@]}" -ge "2" ]
