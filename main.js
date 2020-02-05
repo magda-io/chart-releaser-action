@@ -17,6 +17,8 @@ const path = require("path");
 
 const proc = spawnSync('bash', [path.join(__dirname, 'main.sh')], {stdio: 'inherit', encoding: 'utf8'});
 
+console.log(proc);
+
 if(proc.stderr) {
   console.log("Error: ");
   console.log(proc.stderr);

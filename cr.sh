@@ -16,7 +16,6 @@
 
 set -o errexit
 set -o nounset
-set -o pipefail
 
 DEFAULT_CHART_RELEASER_VERSION=v0.2.3
 
