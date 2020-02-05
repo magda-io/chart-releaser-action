@@ -171,15 +171,16 @@ install_chart_releaser() {
 
 lookup_latest_tag() {
     git fetch --tags > /dev/null 2>&1
-
+    
     local tags=( $(git tag -l --sort=-version:refname | head -2) )
-    if [ -z "${tags[1]}" ]
+
+    if [ "${#tags[@]}" -ge "2" ]
     then
-      # If no at least 2 tags available, get earliest commit in repo
-      git log --reverse --pretty=format:"%H" | head -1
-    else
-      # Get most 2nd recent tag commit as github release trigger will create tag before trigger
+      # Get most recent tag commit
       git rev-list -n 1 ${tags[1]}
+    else
+      # Get earliest commit in repo
+      git log --reverse --pretty=format:"%H" | head -1
     fi
 }
 
