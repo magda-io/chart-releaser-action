@@ -15,5 +15,15 @@
 const spawnSync = require('child_process').spawnSync;
 const path = require("path");
 
-const proc = spawnSync('bash', [path.join(__dirname, 'main.sh')], {stdio: 'inherit'});
+const proc = spawnSync('bash', [path.join(__dirname, 'main.sh')], {stdio: 'inherit', encoding: 'utf8'});
+
+if(proc.stderr) {
+  console.log("Error: ");
+  console.log(proc.stderr);
+}
+
+if(proc.stdout) {
+  console.log(proc.stdout);
+}
+
 process.exit(proc.status)
